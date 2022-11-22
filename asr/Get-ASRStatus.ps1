@@ -42,5 +42,5 @@ foreach ($vm in $vms) {
         Vault         = $Vault.Name
         VaultLocation = $Vault.Location
         Protected     = $protected
-    } | Export-Csv C:\temp\export.csv -Append
+    } | Export-Csv D:\Work\Temp\export.csv -Append
 }
