@@ -49,11 +49,13 @@ Param
 ) #Param
 Begin 
 {
+
+    $subscriptionName = (get-azcontext).Subscription.name
     #Collecing Azure virtual machines Information
     Write-Host "Collecing Azure virtual machine Information" -BackgroundColor DarkGreen
     if (($PSBoundParameters.ContainsKey('AllVirtualMachines')) -or ($PSBoundParameters.Count -eq 0))
     {
-        $vms = Get-AzVM -Name "VM-EW-P-HE-FS1"
+        $vms = Get-AzVM
     } #if ($PSBoundParameters.ContainsKey('AllVirtualMachines'))
     elseif ($PSBoundParameters.ContainsKey('VirtualMachineList'))
     {
@@ -98,6 +100,7 @@ Process
         } #else if ($recoveryVaultInfo.BackedUp -eq $true)
         
         [void]$vmBackupReport.Add([PSCustomObject]@{
+            Subscription_Name = $subscriptionName
             VM_Name = $vm.Name
             VM_Location = $vm.Location
             VM_ResourceGroupName = $vm.ResourceGroupName
@@ -115,5 +118,5 @@ Process
 } #Process
 end
 {
-    $vmBackupReport
+    $vmBackupReport | Export-Csv -Path D:\Work\Temp\BackupReport.csv -Append
 } #end
