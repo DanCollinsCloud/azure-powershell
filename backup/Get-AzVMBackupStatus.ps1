@@ -32,9 +32,6 @@
     .EXAMPLE
     PS> .\Get-AzVMBackupInformation.ps1 -VirtualMachineList
     Provide either single virtual machine name or in list
-    
-    .LINK
-    Online version: http://vcloud-lab.com
 
     .LINK
     Get-AzVMBackupInformation.ps1
